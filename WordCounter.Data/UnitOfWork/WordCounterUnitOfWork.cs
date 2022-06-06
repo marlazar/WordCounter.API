@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WordCounter.Core.DataContext;
+﻿using WordCounter.Core.DataContext;
 using WordCounter.Data.Repository.Definition;
 using WordCounter.Data.Repository.Implementation;
 

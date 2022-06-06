@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 using WordCounter.Core.DataContext;
 using WordCounter.Core.Models;
 using WordCounter.Data.Repository.Definition;
@@ -24,6 +19,7 @@ namespace WordCounter.Data.Repository.Implementation
             context.ReadingInstance.Add(r);
             context.SaveChanges();
         }
+
 
         public void Delete(ReadingInstance r)
         {
