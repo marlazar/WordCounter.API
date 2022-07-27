@@ -4,60 +4,55 @@ using WordCounter.Data.UnitOfWork;
 
 namespace WordCounter.API.Controllers
 {
+    [Route("/api/instances")]
     public class ReadingInstanceController : ControllerBase
     {
-        private readonly IUnitOfWork uow;
+        private readonly IUnitOfWork _iowUnitOfWork;
 
         public ReadingInstanceController(IUnitOfWork uow)
         {
-            this.uow = uow;
+            this._iowUnitOfWork = uow;
         }
 
-        [HttpGet]
-        [Route("/api/instances")]
+        [HttpGet("")]
         public ActionResult ReturnAllInstances()
         {
             try
             {
-                return Ok(uow.ReadingInstance.ReturnAllInstances());
+                return Ok(_iowUnitOfWork.ReadingInstance.ReturnAllInstances());
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return NotFound("Error in input.");
-                throw;
+                return NotFound("There are no instances created!");
             }
         }
 
-        [HttpGet]
-        [Route("/api/instances/{instanceId}")]
+        [HttpGet("id")]
         public ActionResult ReturnReadingInstance(int instanceId)
         {
             try
             {
-                return Ok(uow.ReadingInstance.ReturnReadingInstance(instanceId));
+                return Ok(_iowUnitOfWork.ReadingInstance.ReturnReadingInstance(instanceId));
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return NotFound("Error in input.");
-                throw;
+                return NotFound("The instance doesn't exist!");
             }
         }
 
-        [HttpPost]
-        [Route("/api/instances/count")]
+        [HttpPost("count")]
         public ActionResult CountWords([FromBody] ReadingInstanceDTO readingInstance)
         {
             try
             {
-                var wordCounter = (int?)0;
+                int? wordCounter = 0;
                 char[] delimiters = new char[] { ' ', '\r', '\n' };
                 wordCounter = readingInstance.InstanceText?.Split(delimiters, StringSplitOptions.RemoveEmptyEntries).Length;
                 return Ok(wordCounter);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return NotFound("Error in input.");
-                throw;
+                return NotFound("The number of words cannot be calculated. Please check your input!");
             }
         }
     }

@@ -6,11 +6,11 @@ namespace WordCounter.Data.UnitOfWork
 {
     public class WordCounterUnitOfWork : IUnitOfWork
     {
-        private readonly WordCounterDataContext context;
+        private readonly WordCounterDataContext _context;
 
         public WordCounterUnitOfWork(WordCounterDataContext context)
         {
-            this.context = context;
+            this._context = context;
             ReadingInstance = new RepositoryReadingInstance(context);
         }
 
@@ -18,12 +18,12 @@ namespace WordCounter.Data.UnitOfWork
 
         public void Commit()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Dispose()
         {
-            context.Dispose();
+            _context.Dispose();
         }
     }
 }
