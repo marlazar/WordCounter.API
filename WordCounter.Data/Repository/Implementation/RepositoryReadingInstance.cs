@@ -7,49 +7,36 @@ namespace WordCounter.Data.Repository.Implementation
 {
     public class RepositoryReadingInstance : IRepositoryReadingInstance
     {
-        private WordCounterDataContext context;
+        private WordCounterDataContext _context;
 
         public RepositoryReadingInstance(WordCounterDataContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
         public void Add(ReadingInstance r)
         {
-            context.ReadingInstance.Add(r);
-            context.SaveChanges();
+            _context.ReadingInstance.Add(r);
+            _context.SaveChanges();
         }
 
 
         public void Delete(ReadingInstance r)
         {
-            context.ReadingInstance.Remove(r);
-            context.SaveChanges();
+            _context.ReadingInstance.Remove(r);
+            _context.SaveChanges();
         }
 
-        public ReadingInstance FindById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<ReadingInstance> GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
         public List<ReadingInstance> ReturnAllInstances()
         {
-            return context.ReadingInstance.ToList();
+            return _context.ReadingInstance.ToList();
         }
 
         public ReadingInstance ReturnReadingInstance(int InstanceId)
         {
-            return context.ReadingInstance.Where(ri => ri.InstanceId == InstanceId).FirstOrDefault();
+            return _context.ReadingInstance.Where(ri => ri.InstanceId == InstanceId).FirstOrDefault();
         }
 
-        public List<ReadingInstance> Search(Expression<Func<ReadingInstance, bool>> pred)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
